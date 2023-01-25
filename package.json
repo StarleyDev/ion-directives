@@ -1,0 +1,47 @@
+{
+  "name": "@starley/ion-directives",
+  "version": "1.1.21",
+  "description": "Directivas internas para ionic",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon --watch \"src//\" --exec \"ts-node src/index.ts\" -e ts"
+  },
+  "peerDependencies": {
+    "@angular/common": "^15.1.1 || ^11.2.4 || ~10.0.0",
+    "@angular/core": "^15.1.1 || ^11.2.4 || ~10.0.0",
+    "@angular/forms": "^15.1.1 || ^11.2.4 || ~10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StarleyDev/ion-directives.git"
+  },
+  "keywords": [
+    "ionic",
+    "mask",
+    "mascara",
+    "input",
+    "presshold",
+    "tap",
+    "doubletap"
+  ],
+  "author": "Starley Cazorla",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StarleyDev/ion-directives/issues"
+  },
+  "homepage": "https://github.com/StarleyDev/ion-directives#readme",
+  "devDependencies": {
+    "@angular/common": "^15.1.1",
+    "@angular/core": "^15.1.1",
+    "@angular/forms": "^15.1.1",
+    "@types/node": "^18.11.18",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "tslib": "^2.4.1"
+  }
+}
