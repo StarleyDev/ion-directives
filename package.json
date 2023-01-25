@@ -1,12 +1,16 @@
 {
   "name": "@starley/ion-directives",
-  "version": "1.1.21",
+  "version": "1.2.1",
   "description": "Directivas internas para ionic",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon --watch \"src//\" --exec \"ts-node src/index.ts\" -e ts"
+    "ngc": "ngc",
+    "build": "rm -rf dist && npm run ngc",
+    "publishPackage": "npm run build && npm publish"
   },
   "peerDependencies": {
     "@angular/common": "^15.1.1 || ^11.2.4 || ~10.0.0",
@@ -33,9 +37,11 @@
   },
   "homepage": "https://github.com/StarleyDev/ion-directives#readme",
   "devDependencies": {
-    "@angular/common": "^15.1.1",
-    "@angular/core": "^15.1.1",
-    "@angular/forms": "^15.1.1",
+    "@angular/common": "^15.1.2",
+    "@angular/compiler": "^15.1.2",
+    "@angular/compiler-cli": "^15.1.2",
+    "@angular/core": "^15.1.2",
+    "@angular/forms": "^15.1.2",
     "@types/node": "^18.11.18",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
