@@ -3,7 +3,10 @@ import { NgModel } from "@angular/forms";
 
 /**
  * Responsavel pelo mascaramento de inputs
+ * @author Thiago Przyczynski
+ * przyczynski@gmail.com
  */
+
 @Directive({
     selector: '[appMask]',
     host: {
@@ -23,8 +26,6 @@ export class IonInputMaskDirective {
     constructor(public model: NgModel,
         @Attribute('appMask') pattern: string) {
         this.pattern = pattern;
-
-        console.log('Inicou inputMask');
     }
 
     /**

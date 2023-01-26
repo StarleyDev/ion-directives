@@ -26,9 +26,7 @@ export class TapDirective implements OnInit {
         interval: 300,
     };
 
-    constructor() {
-        console.log('Inicou appTap');
-    }
+    constructor() { }
 
     ngOnInit(): void {
         this.tapGesture.enabled = true;

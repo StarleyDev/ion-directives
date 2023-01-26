@@ -22,9 +22,7 @@ export class PressHoldDirective implements OnInit {
     tapCount = 0;
     tapTimeout: any = null;
 
-    constructor() {
-        console.log('Inicou appPressHold');
-     }
+    constructor() { }
 
     ngOnInit(): void {
         this.pressGesture.enabled = true;
