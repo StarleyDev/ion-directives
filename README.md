@@ -59,7 +59,9 @@ Resultado --> 123.456.789-00
 
 ### Para usar a pressHold 'appPressHold'
 
-O tempo minimo e de 450 milisegundos! **( Adicionarei no futuro a possibilidade de customizar esse tempo! )**
+O tempo minimo e de 450 milisegundos!
+
+Caso queria alterar o tempo minimo basta adicionar o tempo desejado 
 
 Adicione a chamada de 'appPressHold' juntamente com o '(press)' pois ele será o responsavel pela ação!
 
@@ -68,6 +70,12 @@ my-component.html
 <ion-content>
     ...
     <ion-item appPressHold (press)="doSomething()>
+      <ion-label>PressHold</ion-label>
+    </ion-item>
+    ...
+
+     ... Caso queria usar com tempo definido
+    <ion-item appPressHold="250" (press)="doSomething()>
       <ion-label>PressHold</ion-label>
     </ion-item>
     ...

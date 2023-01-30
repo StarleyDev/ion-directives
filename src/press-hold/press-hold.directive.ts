@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { Attribute, Directive, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 
 /**
  * Gerencia pressHold
@@ -22,7 +22,9 @@ export class PressHoldDirective implements OnInit {
     tapCount = 0;
     tapTimeout: any = null;
 
-    constructor() { }
+    constructor(@Attribute('appPressHold') pattern: number = 350) {
+        this.pressGesture.interval = pattern;
+    }
 
     ngOnInit(): void {
         this.pressGesture.enabled = true;
