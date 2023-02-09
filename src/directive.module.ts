@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
     declarations: [
         PressHoldDirective,
         TapDirective,
-        IonInputMaskDirective
+        IonInputMaskDirective,
     ],
     imports: [
         CommonModule
@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
     exports: [
         PressHoldDirective,
         TapDirective,
-        IonInputMaskDirective
+        IonInputMaskDirective,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 
@@ -30,7 +30,7 @@ export class DirectivesModule {
     static forRoot(): ModuleWithProviders<DirectivesModule> {
         return {
             ngModule: DirectivesModule,
-            providers: []
+            providers: [],
         };
     }
- }
+}
