@@ -43,4 +43,14 @@ export class IonUtilsProvider {
         return jsonData.filter((value: any, ind: any) => jsonData.indexOf(value) == ind).map((val: string) => { return JSON.parse(val) });
     }
 
+    /**
+     * Return a string of Enum object
+     * @param enumInput 
+     * @returns 
+     */
+    returnEnumStringName(enumInput: any) {
+        let objectToString = Object.keys(enumInput).map((key: any) => enumInput[key]).filter(value => typeof value === 'string');
+        return objectToString
+    }
+
 }

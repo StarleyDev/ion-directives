@@ -14,7 +14,7 @@ export class PressHoldDirective implements OnInit {
     pressGesture = {
         name: 'press',
         enabled: false,
-        interval: 350
+        interval: 450
     };
     pressTimeout: any = null;
     isPressing: boolean = false;
@@ -22,7 +22,7 @@ export class PressHoldDirective implements OnInit {
     tapCount = 0;
     tapTimeout: any = null;
 
-    constructor(@Attribute('appPressHold') pattern: number = 350) {
+    constructor(@Attribute('appPressHold') pattern: number = 450) {
         this.pressGesture.interval = pattern;
     }
 
