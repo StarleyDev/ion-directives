@@ -1,7 +1,7 @@
 
 # Ion-directives
 
-São directivas para uso em ionic, para mascramento de inputs, pressHold, tap e doubleTap!
+São directivas para uso em ionic, para mascramento de inputs, pressHold, tap, doubleTap, connector sqlite pwa e gerenciamento de datas!
 
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
@@ -78,6 +78,29 @@ my-component.html
     <ion-item appPressHold="250" (press)="doSomething()>
       <ion-label>PressHold</ion-label>
     </ion-item>
+    ...
+</ion-content>
+```
+
+### Para usar 'appTap'
+
+Adicione dentro de um elemento qualquer! Ao adicionar você tera duas opções!
+
+*O (tap) tera ação de intervalo de 250 milisegundos*
+
+*O (doubleTap) terá ação de intervalo de 300 milisegundos*
+
+my-component.html
+```html
+<ion-content>
+    ...
+   <ion-content>
+    ...
+    <ion-item appTap (tap)="doSomething()" (doubleTap)="doSomething()">
+      <ion-label>tap</ion-label>
+    </ion-item>
+    ...
+</ion-content>
     ...
 </ion-content>
 ```
