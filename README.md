@@ -1,7 +1,7 @@
 
 # Ion-directives
 
-São directivas para uso em ionic, para mascramento de inputs, pressHold, tap, doubleTap, connector sqlite pwa e gerenciamento de datas!
+São directivas para uso em ionic, para mascramento de inputs, pressHold, tap, doubleTap, connector sqlite pwa, gerenciamento de datas e remover algo do input!
 
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
@@ -122,6 +122,30 @@ my-component.html
     <ion-item appTap (tap)="doSomething()" (doubleTap)="doSomething()">
       <ion-label>tap</ion-label>
     </ion-item>
+    ...
+</ion-content>
+    ...
+</ion-content>
+```
+
+### Para usar 'appRemoveFromInput'
+
+Agora você poderá remover letras, numeros, caracteres especiais ou um texto qualquer de um input!
+
+* -> "abc" : Remove qualquer caracteres que sejam do alfabeto;
+* -> "number" Remove tudo que for digito;
+* -> "special" : Remove tudo que for caractreres especiais;
+
+* Caso queria remover uma determinada sequencia basta colocar o texto que quiser que ele ira remover o que foi definido!
+
+my-component.html
+```html
+<ion-content>
+    ...
+   <ion-content>
+    ...
+    <ion-input appRemoveFromInput="abc">
+    </ion-input>
     ...
 </ion-content>
     ...

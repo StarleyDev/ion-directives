@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { IonInputMaskDirective } from './input-mask/input-mask.directive';
+import { IonInputRemoveDirective } from './input-remove/input-remove.directive';
 import { PressHoldDirective } from './press-hold/press-hold.directive';
 import { TapDirective } from './tap/tap.directive';
-import { IonInputMaskDirective } from './input-mask/input-mask.directive';
-import { CommonModule } from '@angular/common';
 
 /**
  * Gerencia precionamento de enventos
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
         PressHoldDirective,
         TapDirective,
         IonInputMaskDirective,
+        IonInputRemoveDirective
     ],
     imports: [
         CommonModule
@@ -22,6 +24,7 @@ import { CommonModule } from '@angular/common';
         PressHoldDirective,
         TapDirective,
         IonInputMaskDirective,
+        IonInputRemoveDirective
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 

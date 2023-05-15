@@ -16,7 +16,7 @@ import { NgModel } from "@angular/forms";
 })
 export class IonInputMaskDirective {
 
-    pattern: string;
+    pattern: any;
 
     /**
      * Construtor
@@ -24,7 +24,7 @@ export class IonInputMaskDirective {
      * @param {string} pattern
      */
     constructor(public model: NgModel,
-        @Attribute('appMask') pattern: string = null) {
+        @Attribute('appMask') pattern: any = null) {
         this.pattern = pattern;
     }
 
@@ -33,7 +33,7 @@ export class IonInputMaskDirective {
      * @param event
      */
     onKeyDown(event: any) {
-        let value = event.target.value,
+        let value: any = event.target.value,
             pattern = this.pattern;
         if (pattern !== null) {
             if (event.keyIdentifier === 'U+0008' || event.keyCode === 8 || event.key === 'Backspace') {
