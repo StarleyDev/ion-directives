@@ -30,8 +30,8 @@ export class IonInputRemoveDirective {
     /**
      * Determines whether key down on
      * @author Starley Cazorla
-     * @param event 
-     * @returns  
+     * @param event
+     * @returns
      */
     onKeyDown(event: any) {
         let value: any = event.target.value,
@@ -51,13 +51,14 @@ export class IonInputRemoveDirective {
     /**
      * Gets pattern to remove or set the text to remove
      * @author Starley Cazorla
-     * @param typePatter - abc - number - special
-     * @returns  
+     * @param typePatter - abc - number - special - punctuation
+     * @returns
      */
     getPattern(typePatter: string) {
-        if (typePatter === 'abc') return /[^\d]+/g;
+        if (typePatter === 'letter') return /[a-zA-Z]+/g;
         if (typePatter === 'number') return /[0-9]/;
-        if (typePatter === 'special') return /([\u0300-\u036f]|[^0-9a-zA-Z\s])/g;
+        if (typePatter === 'special') return /[^a-zA-Z0-9\s.,!?'"():;]/g;
+        if (typePatter === 'punctuation') return /[.,!?'"():;_-]/g;
         return typePatter;
     }
 

@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { isNotNullOrUndefined } from 'codelyzer/util/isNotNullOrUndefined';
 @Injectable()
 export class ConnectorSqlitePwaProvider {
     result: any;
@@ -263,7 +262,7 @@ export class ConnectorSqlitePwaProvider {
      */
     async executePost(dataSend: any, dbForUse: string): Promise<any> {
 
-        if (dataSend.length > 0 && isNotNullOrUndefined(dataSend)) {
+        if (dataSend.length > 0 && dataSend !== null && dataSend !== undefined) {
             let novaString = String(dataSend);
             let existeInsert = novaString.toLowerCase().match('insert') || novaString.toLowerCase().match('create') || novaString.toLowerCase().match('alter') || false;
 

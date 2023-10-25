@@ -5,5 +5,6 @@ export * from './press-hold/press-hold.directive';
 export { ConnectorSqlitePwaProvider } from './provider/connector-sqlite-pwa.provider';
 export { DateUtilProvider } from './provider/date-util-provider';
 export { IonUtilsProvider } from './provider/ion-utils-provider';
+export { IonValidateFilds } from './provider/ion-validate-filds';
 export * from './tap/tap.directive';
 

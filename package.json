@@ -1,6 +1,6 @@
 {
   "name": "@starley/ion-directives",
-  "version": "1.2.23",
+  "version": "1.2.34",
   "description": "Directivas internas para ionic",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -13,9 +13,9 @@
     "publishPackage": "npm run build && npm publish"
   },
   "peerDependencies": {
-    "@angular/common": "^15.2.8 || ^11.2.4 || ~10.0.0",
-    "@angular/core": "^15.2.8 || ^11.2.4 || ~10.0.0",
-    "@angular/forms": "^15.2.8 || ^11.2.4 || ~10.0.0"
+    "@angular/common": ">=10.0.0",
+    "@angular/core": ">=10.0.0",
+    "@angular/forms": ">=10.0.0"
   },
   "repository": {
     "type": "git",
@@ -37,19 +37,19 @@
   },
   "homepage": "https://github.com/StarleyDev/ion-directives#readme",
   "devDependencies": {
-    "@angular/common": "^15.2.8",
-    "@angular/compiler": "^15.2.8",
-    "@angular/compiler-cli": "^15.2.8",
-    "@angular/core": "^15.2.8",
-    "@angular/forms": "^15.2.8",
-    "@types/node": "^18.16.0",
-    "nodemon": "^2.0.22",
+    "@angular/common": "^16.2.0",
+    "@angular/compiler": "^16.2.0",
+    "@angular/compiler-cli": "^16.2.0",
+    "@angular/core": "^16.2.0",
+    "@angular/forms": "^16.2.0",
+    "@types/node": "^20.5.0",
+    "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "codelyzer": "^6.0.2",
     "moment": "^2.29.4",
-    "tslib": "^2.5.0"
+    "tslib": "^2.6.1"
   }
 }
