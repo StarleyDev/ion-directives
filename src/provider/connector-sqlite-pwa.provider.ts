@@ -37,10 +37,10 @@ export class ConnectorSqlitePwaProvider {
     }
 
     /** Retorna a url da imagem ou imagem padrao quando nao encontra
-     * @param file 
-     * @param path 
-     * @param userIdentify 
-     * @returns 
+     * @param file
+     * @param path
+     * @param userIdentify
+     * @returns
      */
     async getUrlImg(userIdentify: any, path: any, file: any): Promise<string> {
         return `${this.endpointServer}/api/files/getImg?img=arquivos_${userIdentify}/${path}/${file}`;
@@ -48,12 +48,12 @@ export class ConnectorSqlitePwaProvider {
 
     /**
      * Envia para o BackEnd informações para salvar as imagens localmente
-     * @param folderName 
-     * @param fileName 
-     * @param selectedFile 
-     * @param isPrincipal 
-     * @param userIdentify 
-     * @returns 
+     * @param folderName
+     * @param fileName
+     * @param selectedFile
+     * @param isPrincipal
+     * @param userIdentify
+     * @returns
      */
     async arquivoImg(folderName: string, fileName: string, selectedFile: any, isPrincipal: boolean, userIdentify: string) {
 
@@ -84,12 +84,12 @@ export class ConnectorSqlitePwaProvider {
 
     /**
      * Envia para o BackEnd informações para salvar as imagens localmente
-     * @param folderName 
-     * @param fileName 
-     * @param selectedFile 
+     * @param folderName
+     * @param fileName
+     * @param selectedFile
      * @param operationType binary - utf8
-     * @param userIdentify 
-     * @returns 
+     * @param userIdentify
+     * @returns
      */
     async arquivoGeral(folderName: string, fileName: string, selectedFile: any, operationType: string, userIdentify: string) {
 
@@ -118,11 +118,11 @@ export class ConnectorSqlitePwaProvider {
     }
 
     /**
-     * Pega a lista de arquivos disponiveis no servidor 
-     * @param url 
-     * @param endpoint 
-     * @param folderName 
-     * @returns 
+     * Pega a lista de arquivos disponiveis no servidor
+     * @param url
+     * @param endpoint
+     * @param folderName
+     * @returns
      */
     async getListArquivos(url?: string, endpoint?: string, folderName?: string) {
 
@@ -152,9 +152,9 @@ export class ConnectorSqlitePwaProvider {
 
     /**
      *  Envia para o BackEnd informações para salvar as imagens localmente
-     * @param urlArquivo 
-     * @param fileName 
-     * @returns 
+     * @param urlArquivo
+     * @param fileName
+     * @returns
      */
     async enviarUrlParaSalvar(urlArquivo: string, fileName: string) {
 
@@ -184,8 +184,8 @@ export class ConnectorSqlitePwaProvider {
 
     /**
      *  Veririca se selectedFile existe
-     * @param fileName 
-     * @returns 
+     * @param fileName
+     * @returns
      */
     async checkFile(fileName: string) {
 
@@ -218,7 +218,7 @@ export class ConnectorSqlitePwaProvider {
      * Envia para o BackEnd informações para salvar as imagens localmente
      * @param filePath caminho da pasta
      * @param operationType - criarPasta - deletarPasta
-     * @returns 
+     * @returns
      */
     async gerenciarPastas(filePath: string, operationType: string) {
 
@@ -283,7 +283,7 @@ export class ConnectorSqlitePwaProvider {
                 let options = new HttpHeaders();
                 this.httpCliente.post(`${this.endpointServer}/api/executeDb/${endpoint}`, {
                     params: { isHeader: 'no' },
-                    todo: dataSend, dbForUse: dbForUse, instanceDb: this.instanceDbServerName
+                    stringSql: dataSend, dbForUse: dbForUse, instanceDb: this.instanceDbServerName
                 }, { headers: options.append("x-access-token", this.userToken) }
                 ).subscribe(async (data) => {
                     resolve(data);
@@ -306,7 +306,7 @@ export class ConnectorSqlitePwaProvider {
 
     /**
    * Recuoerando selectedFile do servidor do tipo buffer
-   * @param url 
+   * @param url
    * @param responseType - arraybuffer - blob
    * @returns buffer
    */

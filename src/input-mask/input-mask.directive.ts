@@ -1,73 +1,62 @@
-import { Attribute, Directive } from '@angular/core';
-import { NgModel } from "@angular/forms";
+import { ChangeDetectorRef, Directive, ElementRef, HostListener, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 /**
- * Responsavel pelo mascaramento de inputs
- * @author Thiago Przyczynski
- * przyczynski@gmail.com
+ * Directive input mask
+ * @author Starley Cazorla
+ * @version 1.0.0
  */
 
 @Directive({
     selector: '[appMask]',
-    host: {
-        '(keydown)': 'onKeyDown($event)'
-    },
     providers: [NgModel]
 })
-export class IonInputMaskDirective {
+export class IonInputMaskDirective implements OnChanges {
 
-    pattern: any;
+    @Input('appMask') pattern: string;
+    private rawValue: string = '';
 
-    /**
-     * Construtor
-     * @param {NgModel} model
-     * @param {string} pattern
-     */
-    constructor(public model: NgModel,
-        @Attribute('appMask') pattern: any = null) {
-        this.pattern = pattern;
+    constructor(private elementRef: ElementRef, private renderer: Renderer2, private ngModel: NgModel, private cdRef: ChangeDetectorRef) { }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['pattern'] && !changes['pattern'].firstChange) {
+            // Quando a máscara muda, limpe o valor e aplique a nova máscara
+            this.rawValue = this.extractRawValue(this.ngModel.value); // Extraia o valor bruto antes de aplicar a nova máscara
+            this.applyMask(); // Reaplique a máscara
+            this.cdRef.detectChanges();
+        }
     }
 
-    /**
-     * Listener para mudança de valor do input
-     * @param event
-     */
-    onKeyDown(event: any) {
-        let value: any = event.target.value,
-            pattern = this.pattern;
-        if (pattern !== null) {
-            if (event.keyIdentifier === 'U+0008' || event.keyCode === 8 || event.key === 'Backspace') {
-                if (value.length) { //prevent fatal exception when backspacing empty value in progressive web app
-                    //remove all trailing formatting then delete character
-                    while (pattern[value.length] && pattern[value.length] !== '*') {
-                        value = value.substring(0, value.length - 1);
-                    }
-                    //remove all leading formatting to restore placeholder
-                    if (pattern.substring(0, value.length).indexOf('*') < 0) {
-                        value = value.substring(0, value.length - 1);
-                    }
-                }
+    @HostListener('input', ['$event.target.value'])
+    onInput(value: string) {
+        this.rawValue = this.extractRawValue(value); // Atualize o valor bruto com o novo valor de entrada
+        this.applyMask(); // Reaplique a máscara
+    }
 
-                // Caso o padrao esteja definido como null ira retornar o valor digitado!
+    private applyMask() {
+        // Aplique a máscara ao valor bruto
+        const maskedValue = this.maskValue(this.rawValue, this.pattern);
+        Promise.resolve().then(() => {
+            // Atualizar o input e o modelo de controle com o valor mascarado
+            this.renderer.setProperty(this.elementRef.nativeElement, 'value', maskedValue);
+            this.ngModel.control?.setValue(maskedValue, { emitEvent: false });
+        });
+    }
+
+    private extractRawValue(value: string): string {
+        return value.replace(/\D/g, ''); // Remove todos os caracteres não dígitos
+    }
+
+    private maskValue(rawValue: string, mask: string): string {
+        let maskedValue = '';
+        let rawValIndex = 0;
+        for (let i = 0; i < mask.length && rawValIndex < rawValue.length; i++) {
+            if (mask[i] === '*') {
+                maskedValue += rawValue[rawValIndex++];
             } else {
-                let maskIndex = value.length;
-                let formatted = '';
-                formatted += value;
-                if (maskIndex < pattern.length) {
-                    //apply trailing formatting
-                    while (pattern[maskIndex] !== '*') {
-                        formatted += pattern[maskIndex];
-                        maskIndex++;
-                    }
-                }
-                value = formatted;
+                maskedValue += mask[i];
             }
         }
-        event.target.value = value;
-        if (this.model) {
-            this.model.update.emit(value);
-        }
-        return true;
+        return maskedValue;
     }
-
 }
