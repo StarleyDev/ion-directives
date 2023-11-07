@@ -44,7 +44,7 @@ export class IonInputMaskDirective implements OnChanges {
     }
 
     private extractRawValue(value: string): string {
-        return value.replace(/\D/g, ''); // Remove todos os caracteres não dígitos
+        return value.replace(/[^a-zA-Z0-9]/g, ''); // Remove todos os caracteres não são letras e digitos
     }
 
     private maskValue(rawValue: string, mask: string): string {

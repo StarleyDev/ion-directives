@@ -39,6 +39,10 @@ export class MyComponent {}
 
 Adicione dentro do input a chamada passando após o simbolo de '=' a formatação desejada!
 
+* Agora e possivel criar mascaras customizadas para serem alteradas
+
+Ex: [appMask]="isCpf ? '***.***.***-**' : '**.***.***/****-**'" 
+
 my-component.html
 
 ```html
