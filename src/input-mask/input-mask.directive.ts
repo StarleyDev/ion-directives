@@ -33,6 +33,10 @@ export class IonInputMaskDirective implements OnChanges {
         this.applyMask(); // Reaplique a máscara
     }
 
+    /**
+     * Applys mask
+     * @author Starley Cazorla
+     */
     private applyMask() {
         // Aplique a máscara ao valor bruto
         const maskedValue = this.maskValue(this.rawValue, this.pattern);
@@ -47,7 +51,20 @@ export class IonInputMaskDirective implements OnChanges {
         return value.replace(/[^a-zA-Z0-9]/g, ''); // Remove todos os caracteres não são letras e digitos
     }
 
+    /**
+     * Masks value
+     * @author Starley Cazorla
+     * @param rawValue
+     * @param mask
+     * @returns value
+     */
     private maskValue(rawValue: string, mask: string): string {
+
+        // Se a máscara não tiver um padrão, não faca nada
+        if (mask === undefined || mask === null || mask === '') {
+            return rawValue;
+        }
+
         let maskedValue = '';
         let rawValIndex = 0;
         for (let i = 0; i < mask.length && rawValIndex < rawValue.length; i++) {
