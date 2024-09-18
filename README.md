@@ -41,7 +41,7 @@ Adicione dentro do input a chamada passando após o simbolo de '=' a formataçã
 
 * Agora e possivel criar mascaras customizadas para serem alteradas
 
-Ex: [appMask]="isCpf ? '***.***.***-**' : '**.***.***/****-**'" 
+Ex: [appMask]="isCpf ? '***.***.***-**' : '**.***.***/****-**'"
 
 my-component.html
 
@@ -157,6 +157,22 @@ my-component.html
   <ion-content>
     ...
     <ion-input appRemoveFromInput="letter"> </ion-input>
+    ...
+  </ion-content>
+  ...
+</ion-content>
+```
+
+### Para usar 'appBlockCopyPaste'
+
+Agora ele ira bloquear o copia e colar do input!
+
+```html
+<ion-content>
+  ...
+  <ion-content>
+    ...
+    <ion-input appBlockCopyPaste> </ion-input>
     ...
   </ion-content>
   ...

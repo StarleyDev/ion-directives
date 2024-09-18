@@ -1,3 +1,4 @@
+export * from './block-input/block-copy-past.directive';
 export * from './directive.module';
 export * from './input-mask/input-mask.directive';
 export * from './input-remove/input-remove.directive';
@@ -7,4 +8,3 @@ export { DateUtilProvider } from './provider/date-util-provider';
 export { IonUtilsProvider } from './provider/ion-utils-provider';
 export { IonValidateFilds } from './provider/ion-validate-filds';
 export * from './tap/tap.directive';
-

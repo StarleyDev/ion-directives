@@ -4,6 +4,7 @@ import { IonInputMaskDirective } from './input-mask/input-mask.directive';
 import { IonInputRemoveDirective } from './input-remove/input-remove.directive';
 import { PressHoldDirective } from './press-hold/press-hold.directive';
 import { TapDirective } from './tap/tap.directive';
+import { BlockCopyPasteDirective } from './block-input/block-copy-past.directive';
 
 /**
  * Gerencia precionamento de enventos
@@ -15,7 +16,8 @@ import { TapDirective } from './tap/tap.directive';
         PressHoldDirective,
         TapDirective,
         IonInputMaskDirective,
-        IonInputRemoveDirective
+        IonInputRemoveDirective,
+        BlockCopyPasteDirective
     ],
     imports: [
         CommonModule
@@ -24,7 +26,8 @@ import { TapDirective } from './tap/tap.directive';
         PressHoldDirective,
         TapDirective,
         IonInputMaskDirective,
-        IonInputRemoveDirective
+        IonInputRemoveDirective,
+        BlockCopyPasteDirective
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 
