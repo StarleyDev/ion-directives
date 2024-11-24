@@ -38,6 +38,10 @@ export class IonInputMaskDirective implements OnChanges {
      * @author Starley Cazorla
      */
     private applyMask() {
+        if (!this.pattern) {
+            return;
+        }
+
         // Aplique a máscara ao valor bruto
         const maskedValue = this.maskValue(this.rawValue, this.pattern);
         Promise.resolve().then(() => {
@@ -61,7 +65,7 @@ export class IonInputMaskDirective implements OnChanges {
     private maskValue(rawValue: string, mask: string): string {
 
         // Se a máscara não tiver um padrão, não faca nada
-        if (mask === undefined || mask === null || mask === '') {
+        if (!mask || mask === undefined || mask === null || mask === '') {
             return rawValue;
         }
 

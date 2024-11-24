@@ -1,6 +1,6 @@
 {
   "name": "@starley/ion-directives",
-  "version": "1.2.44",
+  "version": "1.2.48",
   "description": "Directivas internas para ionic",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "ngc": "ngc",
-    "build": "rm -rf dist && npm run ngc",
+    "build": "rm -rf dist && rm -rf node_modules && npm install && npm run ngc",
     "publishPackage": "npm run build && npm publish"
   },
   "peerDependencies": {
@@ -37,19 +37,19 @@
   },
   "homepage": "https://github.com/StarleyDev/ion-directives#readme",
   "devDependencies": {
-    "@angular/common": "^16.2.12",
-    "@angular/compiler": "^16.2.12",
-    "@angular/compiler-cli": "^16.2.12",
-    "@angular/core": "^16.2.12",
-    "@angular/forms": "^16.2.12",
-    "@types/node": "^20.8.10",
-    "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1",
-    "typescript": "4.9.3"
+    "@angular/common": "^18.0.0",
+    "@angular/compiler": "^18.0.0",
+    "@angular/compiler-cli": "^18.0.00",
+    "@angular/core": "^18.0.0",
+    "@angular/forms": "^18.0.0",
+    "@types/node": "^22.8.6",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.4.0"
   },
   "dependencies": {
     "codelyzer": "^6.0.2",
-    "moment": "^2.29.4",
-    "tslib": "^2.6.2"
+    "moment": "^2.30.1",
+    "tslib": "^2.8.0"
   }
 }
