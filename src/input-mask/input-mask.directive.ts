@@ -4,7 +4,7 @@ import { NgModel } from '@angular/forms';
 /**
  * Directive input mask
  * @author Starley Cazorla
- * @version 1.0.0
+ * @version 3.0.0
  */
 
 @Directive({
@@ -20,6 +20,7 @@ export class IonInputMaskDirective implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['pattern'] && !changes['pattern'].firstChange) {
+            this.pattern = changes['pattern'].currentValue;
             // Quando a máscara muda, limpe o valor e aplique a nova máscara
             this.rawValue = this.extractRawValue(this.ngModel.value); // Extraia o valor bruto antes de aplicar a nova máscara
             this.applyMask(); // Reaplique a máscara
@@ -71,13 +72,18 @@ export class IonInputMaskDirective implements OnChanges {
 
         let maskedValue = '';
         let rawValIndex = 0;
-        for (let i = 0; i < mask.length && rawValIndex < rawValue.length; i++) {
+        let i = 0;
+
+        while (rawValIndex < rawValue.length) {
             if (mask[i] === '*') {
                 maskedValue += rawValue[rawValIndex++];
             } else {
-                maskedValue += mask[i];
+                maskedValue += mask[i] ? mask[i] : '';
             }
+            i = (i + 1) % mask.length; // Volta ao início da máscara se necessário
         }
+
         return maskedValue;
     }
+
 }

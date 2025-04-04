@@ -1,4 +1,4 @@
-import { Attribute, Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { NgModel } from "@angular/forms";
 
 /**
@@ -15,16 +15,14 @@ import { NgModel } from "@angular/forms";
 })
 export class IonInputRemoveDirective {
 
-    pattern: any = null;
+    @Input('appRemoveFromInput') pattern: string;
 
     /**
      * Construtor
      * @param {NgModel} model
      * @param {string} pattern
      */
-    constructor(public model: NgModel,
-        @Attribute('appRemoveFromInput') pattern: any = null) {
-        this.pattern = pattern;
+    constructor(public model: NgModel) {
     }
 
     /**
@@ -34,11 +32,10 @@ export class IonInputRemoveDirective {
      * @returns
      */
     onKeyDown(event: any) {
-        let value: any = event.target.value,
-            pattern = this.pattern;
+        let value: any = event.target.value;
 
-        if (pattern !== null) {
-            value = value.normalize('NFD').replace(this.getPattern(pattern), '');
+        if (this.pattern && this.pattern !== undefined && this.pattern !== null && this.pattern !== '') {
+            value = value.normalize('NFD').replace(this.getPattern(this.pattern), '');
         }
 
         event.target.value = value;
@@ -51,7 +48,7 @@ export class IonInputRemoveDirective {
     /**
      * Gets pattern to remove or set the text to remove
      * @author Starley Cazorla
-     * @param typePatter - abc - number - special - punctuation
+     * @param typePatter - letter - number - special - punctuation
      * @returns
      */
     getPattern(typePatter: string) {
