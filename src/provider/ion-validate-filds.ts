@@ -70,8 +70,8 @@ export class IonValidateFilds {
     /**
      * Validar numero telefone
      * @author Starley Cazorla
-     * @param telefone 
-     * @returns true if numero telefone 
+     * @param telefone
+     * @returns true if numero telefone
      */
     public validarNumeroTelefone(telefone: string): boolean {
         // Remover caracteres não numéricos
@@ -97,6 +97,8 @@ export class IonValidateFilds {
         if (formatoCelular.test(telefone)) {
             const ddd = telefone.substring(0, 2);
             const numero = telefone.substring(2);
+            const dig = telefone[2];
+            if (dig !== '9') return false;
             return this.validarDDD(ddd) && numero.length === 9;
         }
 
@@ -107,8 +109,8 @@ export class IonValidateFilds {
     /**
      * Validar cpf
      * @author Starley Cazorla
-     * @param cpf 
-     * @returns true if cpf 
+     * @param cpf
+     * @returns true if cpf
      */
     validarCPF(cpf: string): boolean {
 
@@ -157,8 +159,8 @@ export class IonValidateFilds {
     /**
      * Validar cnpj
      * @author Starley Cazorla
-     * @param cnpj 
-     * @returns true if cnpj 
+     * @param cnpj
+     * @returns true if cnpj
      */
     validarCNPJ(cnpj: string): boolean {
         // Remover caracteres não numéricos
@@ -221,9 +223,9 @@ export class IonValidateFilds {
     /**
      * Formats fild
      * @author Starley Cazorla
-     * @param inputFildValue 
+     * @param inputFildValue
      * @param [tipoChave] - celular - cpf - cnpj
-     * @returns fild 
+     * @returns fild
      */
     formatFild(inputFildValue: string, tipoChave?: string): any {
         const regexCPF = /^\d{11}$/;
