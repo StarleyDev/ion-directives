@@ -1,62 +1,49 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Host, Input, Self } from '@angular/core';
 import { NgModel } from "@angular/forms";
-
-/**
- * Remove any text from input
- * @author Starley Cazorla
- */
 
 @Directive({
     selector: '[appRemoveFromInput]',
     host: {
-        '(keydown)': 'onKeyDown($event)'
-    },
-    providers: [NgModel]
+        '(ionInput)': 'onIonInput($event)'
+    }
 })
 export class IonInputRemoveDirective {
-
     @Input('appRemoveFromInput') pattern: string;
 
-    /**
-     * Construtor
-     * @param {NgModel} model
-     * @param {string} pattern
-     */
-    constructor(public model: NgModel) {
-    }
+    constructor(@Host() @Self() public model: NgModel) { }
 
     /**
-     * Determines whether key down on
+     * Determines whether ion input on
      * @author Starley Cazorla
      * @param event
-     * @returns
      */
-    onKeyDown(event: any) {
-        let value: any = event.target.value;
+    onIonInput(event: any) {
+        const input = event.target as HTMLInputElement;
+        let value = input.value;
 
-        if (this.pattern && this.pattern !== undefined && this.pattern !== null && this.pattern !== '') {
+        if (this.pattern) {
             value = value.normalize('NFD').replace(this.getPattern(this.pattern), '');
-        }
+            input.value = value;
 
-        event.target.value = value;
-        if (this.model) {
-            this.model.update.emit(value);
+            this.model.control.setValue(value, {
+                emitEvent: true,
+                emitModelToViewChange: true,
+                emitViewToModelChange: true
+            });
         }
-        return true;
     }
 
     /**
-     * Gets pattern to remove or set the text to remove
+     * Gets pattern
      * @author Starley Cazorla
-     * @param typePatter - letter - number - special - punctuation
-     * @returns
+     * @param typePatter
+     * @returns pattern - letter - number - special - punctuation
      */
-    getPattern(typePatter: string) {
+    getPattern(typePatter: string): RegExp {
         if (typePatter === 'letter') return /[a-zA-Z]+/g;
-        if (typePatter === 'number') return /[0-9]/;
+        if (typePatter === 'number') return /[0-9]/g;
         if (typePatter === 'special') return /[^a-zA-Z0-9\s.,!?'"():;]/g;
         if (typePatter === 'punctuation') return /[.,!?'"():;_-]/g;
-        return typePatter;
+        return new RegExp(typePatter, 'g');
     }
-
 }
