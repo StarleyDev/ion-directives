@@ -1,6 +1,6 @@
 {
   "name": "@starley/ion-directives",
-  "version": "1.3.7",
+  "version": "1.3.10",
   "description": "Directivas internas para ionic",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",

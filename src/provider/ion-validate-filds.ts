@@ -8,6 +8,16 @@ import { Injectable } from "@angular/core";
 @Injectable({ providedIn: 'root' })
 export class IonValidateFilds {
 
+    // Novo formato de validação de CNPJ
+    private tamanhoCNPJSemDV = 12;
+    private regexCNPJSemDV = /^([A-Z\d]){12}$/;
+    private regexCNPJ = /^([A-Z\d]){12}(\d){2}$/;
+    private regexCaracteresNaoPermitidos = /[^A-Z\d./-]/i;
+    private regexCaracteresMascara = /[./-]/g;
+    private cnpjZerado = "00000000000000";
+    private pesosDV = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+    private valorBase: number = "0".charCodeAt(0);
+
     constructor() { }
 
     /**
@@ -163,6 +173,13 @@ export class IonValidateFilds {
      * @returns true if cnpj
      */
     validarCNPJ(cnpj: string): boolean {
+
+        // Novo formato de validação do CNPJ - 2026
+        let newCnpj = /[A-Za-z]/;
+        if (newCnpj.test(cnpj)) {
+            return this.validaNovoFormatoCNPJ(cnpj);
+        }
+
         // Remover caracteres não numéricos
         cnpj = cnpj.replace(/[^\d]/g, '');
 
@@ -218,6 +235,55 @@ export class IonValidateFilds {
 
         // CNPJ válido
         return true;
+    }
+
+    /**
+     * Validas novo formato cnpj
+     * @author Starley Cazorla
+     * @param cnpj
+     * @returns
+     */
+    validaNovoFormatoCNPJ(cnpj: string) {
+        cnpj = cnpj.toUpperCase();
+        if (!this.regexCaracteresNaoPermitidos.test(cnpj)) {
+            let cnpjSemMascara = this.removeMascaraNovoFormatoCNPJ(cnpj);
+            if (this.regexCNPJ.test(cnpjSemMascara) && cnpjSemMascara !== this.cnpjZerado) {
+                const dvInformado = cnpjSemMascara.substring(this.tamanhoCNPJSemDV);
+                const dvCalculado = this.calculaDvNovoFormatoCNPJ(cnpjSemMascara.substring(0, this.tamanhoCNPJSemDV));
+                return dvInformado === dvCalculado;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Calculas dv novo formato cnpj
+     * @author Starley Cazorla
+     * @param cnpj
+     * @returns
+     */
+    calculaDvNovoFormatoCNPJ(cnpj: string) {
+        cnpj = cnpj.toUpperCase();
+        if (!this.regexCaracteresNaoPermitidos.test(cnpj)) {
+            let cnpjSemMascara = cnpj.replace(this.regexCaracteresMascara, '');
+            if (this.regexCNPJSemDV.test(cnpjSemMascara) && cnpjSemMascara !== this.cnpjZerado.substring(0, this.tamanhoCNPJSemDV)) {
+                let somatorioDV1 = 0;
+                let somatorioDV2 = 0;
+                for (let i = 0; i < this.tamanhoCNPJSemDV; i++) {
+                    const asciiDigito = cnpjSemMascara.charCodeAt(i) - this.valorBase;
+                    somatorioDV1 += asciiDigito * this.pesosDV[i + 1];
+                    somatorioDV2 += asciiDigito * this.pesosDV[i];
+                }
+                const dv1 = somatorioDV1 % 11 < 2 ? 0 : 11 - (somatorioDV1 % 11);
+                somatorioDV2 += dv1 * this.pesosDV[this.tamanhoCNPJSemDV];
+                const dv2 = somatorioDV2 % 11 < 2 ? 0 : 11 - (somatorioDV2 % 11);
+                return `${dv1}${dv2}`;
+            }
+        }
+    }
+
+    removeMascaraNovoFormatoCNPJ(cnpj: string): string {
+        return cnpj.replace(this.regexCaracteresMascara, "");
     }
 
     /**
