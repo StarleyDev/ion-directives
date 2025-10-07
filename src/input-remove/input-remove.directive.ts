@@ -1,4 +1,4 @@
-import { Directive, Host, Input, Self } from '@angular/core';
+import { Directive, Host, Input, Optional, Self } from '@angular/core';
 import { NgModel } from "@angular/forms";
 
 @Directive({
@@ -10,7 +10,7 @@ import { NgModel } from "@angular/forms";
 export class IonInputRemoveDirective {
     @Input('appRemoveFromInput') pattern: string;
 
-    constructor(@Host() @Self() public model: NgModel) { }
+    constructor(@Optional() @Host() @Self() public model: NgModel) { }
 
     /**
      * Determines whether ion input on
@@ -25,11 +25,13 @@ export class IonInputRemoveDirective {
             value = value.normalize('NFD').replace(this.getPattern(this.pattern), '');
             input.value = value;
 
-            this.model.control.setValue(value, {
-                emitEvent: true,
-                emitModelToViewChange: true,
-                emitViewToModelChange: true
-            });
+            if (this.model) {
+                this.model.control.setValue(value, {
+                    emitEvent: true,
+                    emitModelToViewChange: true,
+                    emitViewToModelChange: true
+                });
+            }
         }
     }
 

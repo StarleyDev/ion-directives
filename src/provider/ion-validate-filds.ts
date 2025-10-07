@@ -123,45 +123,33 @@ export class IonValidateFilds {
      * @returns true if cpf
      */
     validarCPF(cpf: string): boolean {
-
         cpf = cpf.replace(/\D/g, '');
+
+        // CPF precisa ter 11 dígitos
+        if (cpf.length !== 11) return false;
+
+        // Elimina CPFs inválidos conhecidos (sequências repetidas)
+        if (/^(\d)\1{10}$/.test(cpf)) return false;
 
         let soma = 0;
         let resto;
 
-        if (cpf === '00000000000') {
-            return false;
-        }
-
+        // Valida primeiro dígito
         for (let i = 1; i <= 9; i++) {
-            soma = soma + parseInt(cpf.substring(i - 1, i), 10) * (11 - i);
+            soma += parseInt(cpf.substring(i - 1, i), 10) * (11 - i);
         }
-
         resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf.substring(9, 10), 10)) return false;
 
-        if (resto === 10 || resto === 11) {
-            resto = 0;
-        }
-
-        if (resto !== parseInt(cpf.substring(9, 10), 10)) {
-            return false;
-        }
-
+        // Valida segundo dígito
         soma = 0;
-
         for (let i = 1; i <= 10; i++) {
-            soma = soma + parseInt(cpf.substring(i - 1, i), 10) * (12 - i);
+            soma += parseInt(cpf.substring(i - 1, i), 10) * (12 - i);
         }
-
         resto = (soma * 10) % 11;
-
-        if (resto === 10 || resto === 11) {
-            resto = 0;
-        }
-
-        if (resto !== parseInt(cpf.substring(10, 11), 10)) {
-            return false;
-        }
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf.substring(10, 11), 10)) return false;
 
         return true;
     }
