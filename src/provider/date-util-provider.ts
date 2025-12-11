@@ -14,8 +14,8 @@ export class DateUtilProvider {
 
     /**
     * Veifica se a data e valida
-    * @param date 
-    * @returns 
+    * @param date
+    * @returns
     */
     isValidDate(date: string) {
         if (!date) return false;
@@ -27,8 +27,8 @@ export class DateUtilProvider {
     /**
    * Converts date to int
    * @author Starley Cazorla
-   * @param data 
-   * @returns date to int 
+   * @param data
+   * @returns date to int
    */
     convertDateToInt(data: string): number {
         let temp: any;
@@ -56,8 +56,8 @@ export class DateUtilProvider {
     /**
      * Determines whether today is
      * @author Starley Cazorla
-     * @param dateInput 
-     * @returns true if today 
+     * @param dateInput
+     * @returns true if today
      */
     isToday(dateInput: any): boolean {
         if (dateInput && this.convertDateToInt(dateInput) === this.convertDateToInt(new Date().toLocaleDateString('pt-Br'))) return true;
@@ -67,8 +67,8 @@ export class DateUtilProvider {
     /**
      * Determines whether date is bigger today is
      * @author Starley Cazorla
-     * @param dateInput 
-     * @returns true if date is bigger today 
+     * @param dateInput
+     * @returns true if date is bigger today
      */
     isDateIsSmallerToday(dateInput: any): boolean {
         if (dateInput === null || dateInput === undefined) return false;
@@ -79,21 +79,22 @@ export class DateUtilProvider {
     /**
      * Firsts bigger than second
      * @author Starley Cazorla
-     * @param firstDate 
-     * @param lastDate 
-     * @returns true if bigger than second 
+     * @param firstDate
+     * @param lastDate
+     * @returns true if bigger than second
      */
     firstBiggerThanSecond(firstDate: any, lastDate: any): boolean {
         if (this.convertDateToInt(firstDate) < this.convertDateToInt(lastDate)) return true;
         return false;
     }
 
-      /**
-       * Gets diff days by today
-       * @author Starley Cazorla
-       * @param date1 
-       * @returns  
-       */
+    /**
+     * Gets diff days by today
+     * @author Starley Cazorla
+     * @param date1
+     * @deprecated
+     * @returns
+     */
     getDiffDaysByToday(date1: any) {
         var momentA = moment(date1, 'DD/MM/YYYY');
         var momentB = moment(new Intl.DateTimeFormat('pt-BR').format(this.newDate), 'DD/MM/YYYY');
@@ -105,9 +106,9 @@ export class DateUtilProvider {
     /**
      * Gets name day
      * @author Starley Cazorla
-     * @param date 
-     * @param nmDays 
-     * @returns  
+     * @param date
+     * @param nmDays
+     * @returns
      */
     getNameDay(date: any, nmDays: any) {
         var days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
@@ -117,5 +118,19 @@ export class DateUtilProvider {
             'dayName': days[d.getDay()],
             'dayNumber': d.getDate()
         };
+    }
+
+    /**
+     * Gets diff days by date
+     * @author Starley Cazorla
+     * @param date
+     * @returns
+     */
+    getDiffDaysByDate(date: Date) {
+        if (!date) return 0;
+        const today = new Date();
+        const diffTime = Math.abs(date.getTime() - today.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
     }
 }
