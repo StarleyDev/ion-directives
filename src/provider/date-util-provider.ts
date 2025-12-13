@@ -129,8 +129,10 @@ export class DateUtilProvider {
     getDiffDaysByDate(date: Date) {
         if (!date) return 0;
         const today = new Date();
-        const diffTime = Math.abs(date.getTime() - today.getTime());
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        return diffDays;
+        today.setHours(0, 0, 0, 0); // opcional: ignora hora
+        date.setHours(0, 0, 0, 0);
+
+        const diffDays = Math.floor((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+        return diffDays; // positivo = dias restantes, negativo = dias vencidos (-4 = 4 dias atrasado)
     }
 }
