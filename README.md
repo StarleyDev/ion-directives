@@ -35,6 +35,28 @@ import { DirectivesModule } from '@starley/ion-directives';
 export class MyComponent {}
 ```
 
+### Para usar a formUtilService
+
+* Importe a service FormUtilService no componente que desejar utilizar.
+
+* Injete a service no construtor do componente:
+
+```typescript
+constructor(private formUtilService: FormUtilService) {}
+```
+
+Crie o formulario usando o FormGroup, e chame o método `prepareFormChangeDetection` passando o formulário como parâmetro.
+
+Ex: this.myForm = this.formUtilService.prepareFormChangeDetection(this.myForm);
+
+É necessário retornar o formulário para a própria variável, pois quando o formulário é atualizado, as mudanças precisam ser refletidas na variável para que o sistema de detecção de mudanças do Angular funcione corretamente.
+
+Agora temos a variavel booleana `hasUnsavedChanges` que indica se o formulário foi modificado e pode ser usada para habilitar/desabilitar botões de salvar com base nas alterações.
+
+Ex: if(this.formUtilService.hasUnsavedChanges) { ... }
+
+Agora você pode usar o formulário com detecção de mudanças automaticamente.
+
 ### Para usar a mascara 'appMask'
 
 Adicione dentro do input a chamada passando após o simbolo de '=' a formatação desejada!

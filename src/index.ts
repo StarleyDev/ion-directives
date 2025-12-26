@@ -1,5 +1,6 @@
 export * from './block-input/block-copy-past.directive';
 export * from './directive.module';
+export { FormUtilService } from './utils/form-util.service';
 export * from './input-mask/input-mask.directive';
 export * from './input-remove/input-remove.directive';
 export * from './press-hold/press-hold.directive';

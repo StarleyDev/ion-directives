@@ -128,11 +128,62 @@ export class DateUtilProvider {
      */
     getDiffDaysByDate(date: Date) {
         if (!date) return 0;
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); // opcional: ignora hora
+
+        this.newDate.setHours(0, 0, 0, 0); // opcional: ignora hora
         date.setHours(0, 0, 0, 0);
 
-        const diffDays = Math.floor((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+        const diffDays = Math.floor((date.getTime() - this.newDate.getTime()) / (1000 * 60 * 60 * 24));
         return diffDays; // positivo = dias restantes, negativo = dias vencidos (-4 = 4 dias atrasado)
     }
+
+    getDiffYearsByToday(date: Date) {
+        if (!date) return false;
+
+        const hoje = new Date();
+        const dataLimite = new Date(
+            hoje.getFullYear() - 18,
+            hoje.getMonth(),
+            hoje.getDate()
+        );
+
+        return date <= dataLimite;
+    }
+
+    /**
+     * Format date to DD/MM/YYYY
+     * @author Starley Cazorla
+     * @param date
+     * @returns formatted date
+     */
+    returnFormatBrDate(date: Date | string) {
+        const d = date instanceof Date ? date : new Date(date);
+
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+
+        return `${day}/${month}/${year}`;
+    }
+
+    /**
+     * Convert DD/MM/YYYY to Date
+     * @author Starley Cazorla
+     * @param dateBr
+     * @returns Date object
+     */
+    convertBrDateToDate(dateBr: string): Date {
+        if (!dateBr) {
+            throw new Error('Data não informada');
+        }
+
+        const [day, month, year] = dateBr.split('/').map(Number);
+
+        if (!day || !month || !year) {
+            throw new Error('Data inválida');
+        }
+
+        return new Date(year, month - 1, day, 0, 0, 0, 0);
+    }
+
+
 }
