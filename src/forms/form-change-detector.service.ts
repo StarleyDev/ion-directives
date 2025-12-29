@@ -4,15 +4,15 @@ import { FormGroup } from '@angular/forms';
 @Injectable({
     providedIn: 'root',
 })
-export class FormUtilService {
+export class FormChangeDetector {
 
-    hasUnsavedChanges: boolean = false;
+    isDirty: boolean = false;
 
     private originalFormValues: any;
 
     private clearFormChangeDetection() {
         this.originalFormValues = null;
-        this.hasUnsavedChanges = false;
+        this.isDirty = false;
     }
 
     prepareFormChangeDetection(documentForm: FormGroup) {
@@ -21,7 +21,7 @@ export class FormUtilService {
         // Garante estado pristine inicial
         documentForm.markAsPristine();
         documentForm.markAsUntouched();
-        this.hasUnsavedChanges = false;
+        this.isDirty = false;
         this.formChangeDetection(documentForm);
 
         return documentForm;
@@ -30,14 +30,14 @@ export class FormUtilService {
     private formChangeDetection(documentForm: FormGroup): any {
         documentForm.valueChanges.subscribe(() => {
             if (!this.originalFormValues) {
-                this.hasUnsavedChanges = false;
+                this.isDirty = false;
                 return;
             }
 
             const currentValues = documentForm.getRawValue();
             let normalizedCurrent = { ...currentValues };
             let normalizedOriginal = { ...this.originalFormValues };
-            this.hasUnsavedChanges = JSON.stringify(normalizedCurrent) !== JSON.stringify(normalizedOriginal);
+            this.isDirty = JSON.stringify(normalizedCurrent) !== JSON.stringify(normalizedOriginal);
         });
     }
 

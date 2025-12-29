@@ -3,8 +3,8 @@ This changelog document tracks the changes in the project since `v1.3.7`.
 
 This project adheres to [semver](https://semver.org/).
 
-## [1.3.19](https://github.com/StarleyDev/ion-directives/releases/tag/v1.3.19)
-* Add FormUtilService to detect form changes
+## [1.3.22](https://github.com/StarleyDev/ion-directives/releases/tag/v1.3.19)
+* Add FormChangeDetector to detect form changes
 
 ## [1.3.15](https://github.com/StarleyDev/ion-directives/releases/tag/v1.3.9)
 * Fix validation CPF numbers

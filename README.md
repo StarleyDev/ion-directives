@@ -35,25 +35,25 @@ import { DirectivesModule } from '@starley/ion-directives';
 export class MyComponent {}
 ```
 
-### Para usar a formUtilService
+### Para usar a FormChangeDetector
 
-* Importe a service FormUtilService no componente que desejar utilizar.
+* Importe a service FormChangeDetector no componente que desejar utilizar.
 
 * Injete a service no construtor do componente:
 
 ```typescript
-constructor(private formUtilService: FormUtilService) {}
+constructor(private formChangeDetector: FormChangeDetector) {}
 ```
 
 Crie o formulario usando o FormGroup, e chame o método `prepareFormChangeDetection` passando o formulário como parâmetro.
 
-Ex: this.myForm = this.formUtilService.prepareFormChangeDetection(this.myForm);
+Ex: this.myForm = this.formChangeDetector.prepareFormChangeDetection(this.myForm);
 
 É necessário retornar o formulário para a própria variável, pois quando o formulário é atualizado, as mudanças precisam ser refletidas na variável para que o sistema de detecção de mudanças do Angular funcione corretamente.
 
-Agora temos a variavel booleana `hasUnsavedChanges` que indica se o formulário foi modificado e pode ser usada para habilitar/desabilitar botões de salvar com base nas alterações.
+Agora temos a variavel booleana `isDirty` que indica se o formulário foi modificado e pode ser usada para habilitar/desabilitar botões de salvar com base nas alterações.
 
-Ex: if(this.formUtilService.hasUnsavedChanges) { ... }
+Ex: if(this.formChangeDetector.isDirty) { ... }
 
 Agora você pode usar o formulário com detecção de mudanças automaticamente.
 
